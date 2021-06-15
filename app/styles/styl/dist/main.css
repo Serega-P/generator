@@ -1,0 +1,53 @@
+@import '/node_modules/bootstrap/dist/css/bootstrap-reboot.min.css';
+@font-face {
+  font-family: 'roboto-oh5';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/roboto-regular-webfont.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'roboto-oh5';
+  font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/roboto-italic-webfont.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'roboto-oh5';
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/roboto-bold-webfont.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'roboto-oh5';
+  font-style: italic;
+  font-weight: 700;
+  src: url("../fonts/roboto-bolditalic-webfont.woff2") format('woff2');
+}
+::placeholder {
+  color: #666;
+}
+::selection {
+  background-color: #ffa500;
+  color: #fff;
+}
+input,
+textarea {
+  outline: none;
+}
+input:focus:required:invalid,
+textarea:focus:required:invalid {
+  border-color: #f00;
+}
+input:required:valid,
+textarea:required:valid {
+  border-color: #008000;
+}
+body {
+  font-family: roboto-oh5, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #333;
+  min-width: 320px;
+  position: relative;
+  overflow-x: hidden;
+}
