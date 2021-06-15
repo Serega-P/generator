@@ -1,0 +1,226 @@
+
+.generator-password
+	width: 100%
+	display: flex
+	justify-content: center
+	padding: 75px 0
+	@include media-breakpoint-down(xs)
+		padding: 40px 0
+
+.generator-password-container
+	width: 600px
+	min-width: 320px
+	position: relative
+	padding: 0 20px
+
+.generator-password-h1
+	font-size: 30px
+	font-weight: bold
+	text-align: center
+	margin-bottom: 40px
+	@include media-breakpoint-down(xs)
+		font-size: 24px
+		line-height: 1.5
+
+.generatir-password-input
+	width: 100%
+	background-color: #fff
+	height: 40px
+	padding-left: 10px
+	border-radius: 10px
+	color: $textcolor
+	display: flex
+	justify-content: flex-end
+	align-items: center
+	position: relative
+	z-index: 1
+
+.badge-password
+	font-size: 14px
+	font-weight: 500
+	line-height: 100%
+	padding: 3px 6px
+	color: #fff
+	margin: 0 10px
+	transition: all .1s ease
+	text-transform: lowercase
+	white-space: nowrap
+	@include media-breakpoint-down(xs)
+		display: none
+
+.length-text
+	.text-large
+		display: inline-block
+		width: 20px
+	.badge-password
+		display: none
+		@include media-breakpoint-down(xs)
+			display: inline-block
+
+
+.button-copy-password
+	width: 40px
+	min-width: 40px
+	height: 100%
+	background-color: $accent
+	border-radius: 0 10px 10px 0
+	padding-left: 1px
+	display: flex
+	justify-content: center
+	align-items: center
+	transition: background .1s ease-out
+	position: relative
+	overflow: hidden
+	&:before
+		content: ''
+		display: block
+		position: absolute
+		width: 30%
+		height: 30%
+		border-radius: 50%
+		background-color: darken($accent, 8)
+		z-index: 1
+		opacity: 0
+		transition: all .2s ease-in
+	&:hover
+		cursor: pointer
+		background-color: darken($accent, 2)
+	img
+		width: 17px
+		height: auto
+		z-index: 2
+		
+.button-copy-password.copu
+	&:before
+		width: 140%
+		height: 140%
+		opacity: 1
+
+.copied-password
+	text-transform: uppercase
+	display: block
+	position: absolute
+	font-size: 12px
+	color: #ffffff
+	font-weight: 500
+	padding: 3px 10px
+	border-radius: 2px
+	top: 0%
+	left: 50%
+	transform: translateX(-50%)
+	background: $accent
+	opacity: 0
+	transition: opacity .1s ease-in, top .1s ease-out
+	z-index: 10
+	white-space: nowrap
+	&.active
+		top: -90%
+		opacity: 1
+	&.hide
+		transition: opacity .05s ease-in, top .1s ease-out
+		top: 0%
+		opacity: 0
+
+.ready-password
+	flex-grow: 1
+	text-align: left
+	overflow: hidden
+	white-space: nowrap
+	text-overflow: ellipsis
+
+
+.generatir-password-text
+	font-weight: 500
+	margin: 30px 0 20px
+
+.text-large
+	margin-left: 8px
+	font-weight: bold
+
+.slider-length-password
+	-webkit-appearance: none
+	height: 4px
+	width: 100%
+	background: #fff
+	border-radius: 2px
+	outline: none
+	cursor: pointer
+	&::-webkit-slider-thumb
+		-webkit-appearance: none
+		appearance: none
+		cursor: move
+		z-index: 3
+		width: 50px
+		height: 50px
+		border: 5px solid rgba(#5052A2, .4)
+		cursor: move
+		border-radius: 50%
+		background-image: url(../images/dist/carets.svg)
+		background-position: center
+		background-repeat: no-repeat
+		background-size: cover
+		transition: border .25s ease-out
+		&:hover
+			border: 5px solid rgba(#5052A2, .7)
+
+.checkboxs
+	display: flex
+	align-content: start
+	padding-left: 35px
+
+#uppercase + label
+	text-transform: uppercase
+
+.custom-checkbox
+	margin-right: 56px
+	@include media-breakpoint-down(xs)
+		margin-right: 44px
+	input[type="checkbox"]
+		display: none
+		& + label
+			font-weight: bold
+			position: relative
+			cursor: pointer
+			&:before
+				content: ''
+				display: inline-block
+				width: 25px
+				height: 25px
+				border: 1px solid rgba(#fff, .4)
+				border-radius: 4px
+				position: absolute
+				top: 0
+				left: -35px
+				@include media-breakpoint-down(xs)
+					left: -30px
+		&:checked + label
+			&:before
+				background: $twocolor
+				background-image: url(../images/dist/check.svg)
+				background-repeat: no-repeat
+				background-position: center
+				border: 1px solid $twocolor
+
+.generatir-password-bytton
+	width: 100%
+	text-align: center
+	padding-top: 30px
+
+.bytton
+	outline: none
+	background: $accent
+	border-radius: 10px
+	border: none
+	padding: 12px 18px
+	color: #fff
+	font-weight: 500
+	display: inline-block
+	border-bottom: 3px solid darken($accent, 25%)
+	transition: background .2s ease-out, border .1s ease
+	&:hover
+		background: darken($accent, 8%)
+	.img
+		display: inline-block
+		margin-left: 10px
+		transition: transform .3s cubic-bezier(.73,.17,.64,.94)
+		transform: rotate(0deg)

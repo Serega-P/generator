@@ -1,0 +1,72 @@
+<!--#set var="title" value="Geterator" -->
+<!--#include virtual="/parts/header.html" -->
+
+<header class="home-header">
+
+    <div class="top-line">
+
+        <a href="#" class="home-header__logo my-logo">
+            <img src="images/dist/logo.svg" alt="making">
+            <span><span class="logo-ligth-text">ma</span>king</span>
+        </a>
+
+        <div class="home-header__menu"><img src="images/dist/burger.svg" alt="menu"></div>
+
+    </div>
+
+    <div class="generator-password">
+        <div class="generator-password-container">
+
+            <h1 class="generator-password-h1">Random password generator</h1>
+
+            <div class="generator-itoms">
+
+                <div class="generatir-password-input" id="inputpsw">
+                    <div class="ready-password" id="textpsw">
+                        <xml id="psw">NjgbU&b3vJhj</xml>
+                    </div>
+                    <span class="badge-password strong" date-badge>good</span>
+                    <div class="button-copy-password" id="copyPswBtn" alt="Копировать"><img src="images/dist/copy.svg" alt="Копировать"></div>
+                </div>
+
+                <div class="length-settings">
+                    <div class="length-text generatir-password-text">Password length: <span class="text-large" id="lengthpsw">12</span> <span class="badge-password strong" date-badge>надежный</span></div>
+                    <input type="range" min="4" max="80" class="slider-length-password" id="selectorpassword" value="12" name="range" step="1">
+                </div>
+
+                <div class="password-type-settings">
+                    <div class="passworn-type-text generatir-password-text">Characters used:</div>
+
+                    <div class="checkboxs" id="checkboxs">
+                        <div class="custom-checkbox">
+                            <input type="checkbox" id="uppercase" name="type" data-type="0" checked="true">
+                            <label for="uppercase" class="label-uppercase">abc</label>
+                        </div>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" id="lowercase" name="type" data-type="1">
+                            <label for="lowercase" class="label-lowercase">abc</label>
+                        </div>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" id="numbers" name="type" data-type="2" checked="true">
+                            <label for="numbers" class="label-numbers">123</label>
+                        </div>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" id="specials" name="type" data-type="3">
+                            <label for="specials" class="label-specials">$#&</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="generatir-password-bytton">
+                    <button class="bytton" id="bytton-psw">Generate <img class="img" src="images/dist/sync.svg" alt="Генерировать"></button>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+<!--#include virtual="/parts/footer.html" -->
