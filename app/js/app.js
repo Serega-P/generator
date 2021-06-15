@@ -106,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-
         const random = (min, max) => Math.round(Math.random() * (min - max) + max)
 
 
@@ -212,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             createPassword(slider.value, typePassword(inputs))
         }
         init()
-
+            // не знаю что получится но думаю что я получу опит ((((($)))))
 
     }
 
