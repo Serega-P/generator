@@ -1,0 +1,110 @@
+.burger__container, .burger__container__close
+	cursor: pointer
+	width: 46px
+	height: 46px
+	display: flex
+	justify-content: center
+	align-items: center
+
+.home-header__menu__burger
+	display: inline-block
+	width: 36px
+	height: 2px
+	background: #ffffff
+	border-radius: 2px
+	position: relative
+	z-index: 1
+	&:before, &:after
+		content: ''
+		display: block
+		background: #ffffff
+		width: 36px
+		height: 2px
+		border-radius: 2px
+		position: absolute
+		left: 0
+		transition: all .25s ease-out
+	&:before
+		top: -10px
+	&:after
+		bottom: -10px
+
+.burger__container__close
+	position: absolute
+	top: 0
+	left: 0
+	width: 54px
+	height: 54px
+	z-index: 2
+	border-bottom: 1px solid #183d63
+	border-right: 1px solid #183d63
+
+.home-header__menu__burger.active
+	background: rgba(#fff,0)
+	&:before
+		transform: rotate(45deg)
+		top: 0
+	&:after
+		transform: rotate(-45deg)
+		bottom: 0
+#moverlay
+	position: fixed
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	transition: opacity .25s ease-in-out
+	opacity: 0
+	z-index: 100
+	background: rgba(0,0,0, .7)
+	display: none
+	&.menu__overlay
+		opacity: 1
+	
+.menu__itoms__box
+	width: 320px
+	height: 100vh
+	background: $bgcolor
+	position: fixed
+	transition: right .2s ease-in-out
+	top: 0
+	right: -320px
+	z-index: 150
+	overflow: auto
+	&.active
+		right: 0
+
+.menu__title
+	color: #fff
+	text-transform: uppercase
+	text-align: center
+	width: 100%
+	font-size: 26px
+	font-weight: 500
+	padding: 20px 0
+
+.menu__itoms
+	padding: 0
+	margin: 0
+	.itom
+		list-style: none
+		padding: 0
+		margin: 0
+		a
+			display: block
+			width: 100%
+			padding: 8px 0 8px 20px
+			background: $twocolor
+			color: #fff
+			border-bottom: 1px solid rgba($bgcolor, .4)
+			text-decoration: none
+			outline: none
+			transition: background .2s ease
+			&:hover
+				background: darken($twocolor, 5%)
+			&.activ
+				background: darken($twocolor, 10%)
+
+.scroll-hidden
+	overflow-x: hidden
+  margin-right: calc(-1 * (100vw - 100%)
