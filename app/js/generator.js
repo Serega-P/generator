@@ -1,4 +1,15 @@
 (function() {
+    const pswInpuy = document.getElementById('psw'),
+        slider = document.getElementById('selectorpassword'),
+        lengthpsw = document.getElementById('lengthpsw'),
+        inputs = document.getElementById('checkboxs').getElementsByTagName('input'),
+        inputsBox = document.getElementById('checkboxs'),
+        copyPswBtn = document.getElementById('copyPswBtn'),
+        badgePower = document.getElementsByClassName('badge-password'),
+        but = document.getElementById('bytton-psw'),
+        password = []
+    let deg = 360
+
     const symbols = [
         [
             'A', 'B', 'C', 'D', 'E', 'F', 'G',
@@ -23,65 +34,32 @@
             ':', ';', '=', '?', '@', '[', '\.',
             '\]', '\`', '^', '_', '\{', '\|', '\}', '~'
         ]
-    ]
+    ];
 
+    Array.prototype.clear = function() {
+        this.length = 0
+    }
 
-    $.generator = function(options) {
+    const methods = {
+        init: function(setings) {
+            slider.value = setings.val || 21
+            slider.min = setings.min || 4
+            slider.max = setings.max || 100
+            lengthpsw.innerHTML = setings.val || 21
+            methods.createPassword(slider.value, methods.typePassword(inputs))
+        },
 
-        const pswInpuy = document.getElementById('psw'),
-            slider = document.getElementById('selectorpassword'),
-            lengthpsw = document.getElementById('lengthpsw'),
-            inputs = document.getElementById('checkboxs').getElementsByTagName('input'),
-            inputsBox = document.getElementById('checkboxs'),
-            copyPswBtn = document.getElementById('copyPswBtn'),
-            badgePower = document.getElementsByClassName('badge-password'),
-            password = []
-        let deg = 360
-
-
-
-        Array.prototype.clear = function() {
-            this.length = 0
-        }
-
-        const powerPsw = function(pwr) {
-            if (pwr <= 6) {
-                for (let i = 0; i < badgePower.length; i++) {
-                    badgePower[i].innerHTML = 'VERY WEAK'
-                    badgePower[i].style.background = '#DE1B1B'
-                }
-            } else if (pwr > 6 && pwr < 12) {
-                for (let i = 0; i < badgePower.length; i++) {
-                    badgePower[i].innerHTML = 'WEAK'
-                    badgePower[i].style.background = '#E8D423'
-                }
-            } else if (pwr >= 12 && pwr < 20) {
-                for (let i = 0; i < badgePower.length; i++) {
-                    badgePower[i].innerHTML = 'GOOD'
-                    badgePower[i].style.background = '#27D16F'
-                }
-            } else if (pwr > 20) {
-                for (let i = 0; i < badgePower.length; i++) {
-                    badgePower[i].innerHTML = 'VERY GOOD'
-                    badgePower[i].style.background = '#27D16F'
-                }
-            }
-        }
-
-        //////	Show password
-
-        const showPassword = function(psw) {
+        showPassword: function(psw) {
             pswInpuy.textContent = ''
             psw.forEach((elem, indx) => {
                 setTimeout(() => {
                     pswInpuy.textContent += elem;
                 }, 15 * indx)
             })
-        }
+            return methods.powerPsw(psw.length)
+        },
 
-        //////	 Type password
-
-        const typePassword = function(arr) {
+        typePassword: function(arr) {
             let inputs = [...arr]
             const type = []
             inputs.forEach(input => {
@@ -90,35 +68,21 @@
                 }
             })
             return type
-        }
+        },
 
+        random: function(min, max) {
+            return Math.round(Math.random() * (min - max) + max)
+        },
 
-        const random = (min, max) => Math.round(Math.random() * (min - max) + max)
-
-
-        //////	Create password
-
-        const createPassword = function(len, symbols) {
+        createPassword: function(len, symbols) {
             password.clear()
             for (let i = 0; i < len; i++) {
-                password.push(symbols[`${random(0, symbols.length-1)}`])
+                password.push(symbols[`${methods.random(0, symbols.length-1)}`])
             }
-            return showPassword(password)
+            return methods.showPassword(password)
+        },
 
-        }
-
-
-        slider.oninput = function(evt) {
-            lengthpsw.innerHTML = this.value
-            powerPsw(this.value)
-        }
-
-        slider.addEventListener('change', function() { createPassword(this.value, typePassword(inputs)) })
-
-
-        //////  last input is checked
-
-        const checkeds = function(inputs) {
+        checkeds: function(inputs) {
             let result = []
             Array.from(inputs).forEach(function(chck) {
                 if (chck.checked) {
@@ -126,32 +90,9 @@
                 }
             })
             return result.length
-        }
+        },
 
-
-        //////  inputs event listener
-
-        Array.from(inputs).forEach(function(chck) {
-            chck.addEventListener('change', function(e) {
-
-                if (checkeds([...inputs]) === 0) {
-                    return e.target.checked = true
-                }
-                createPassword(slider.value, typePassword(inputs))
-            })
-        })
-
-        const but = document.getElementById('bytton-psw')
-        but.addEventListener('click', function(e) {
-            let img = but.querySelector('.img')
-            img.style.transform = `rotate(${deg}deg)`
-            deg = deg + 360
-            createPassword(slider.value, typePassword(inputs))
-        })
-
-        ////// Show lable copu
-
-        const lableCopu = function() {
+        lableCopu: function() {
             let box = document.getElementById('inputpsw'),
                 first = document.getElementById('textpsw'),
                 label = document.createElement('div')
@@ -168,11 +109,9 @@
                     setTimeout(() => { box.removeChild(label) }, 200)
                 }, 1000)
             }, 100)
-        }
+        },
 
-        //////	Copy 
-
-        function copyToClipboard(str) {
+        copyToClipboard: function(str) {
             const area = document.createElement('textarea')
 
             document.body.appendChild(area)
@@ -180,28 +119,75 @@
             area.select()
             document.execCommand("copy")
             document.body.removeChild(area)
-            lableCopu()
+            methods.lableCopu()
+        },
+
+        powerPsw: function(pwr) {
+
+            for (let i = 0; i < badgePower.length; i++) {
+                if (window.getComputedStyle(badgePower[i]).display !== 'none') {
+                    if (pwr <= 6) {
+                        return (
+                            badgePower[i].innerHTML = 'VERY WEAK',
+                            badgePower[i].style.background = '#DE1B1B'
+                        )
+                    } else if (pwr > 6 && pwr <= 12) {
+                        return (
+                            badgePower[i].innerHTML = 'WEAK',
+                            badgePower[i].style.background = '#E8D423'
+                        )
+                    } else if (pwr > 12 && pwr <= 20) {
+                        return (
+                            badgePower[i].innerHTML = 'GOOD',
+                            badgePower[i].style.background = '#27D16F'
+                        )
+                    } else if (pwr > 20) {
+                        return (
+                            badgePower[i].innerHTML = 'VERY GOOD',
+                            badgePower[i].style.background = '#27D16F'
+                        )
+                    }
+                }
+            }
         }
 
+    }
 
-        copyPswBtn.addEventListener('click', function(e) {
-            copyToClipboard(password)
-            copyPswBtn.classList.add('copu')
-            setTimeout(() => {
-                copyPswBtn.classList.remove('copu')
-            }, 300)
+    slider.oninput = function(evt) {
+        lengthpsw.innerHTML = this.value
+        methods.powerPsw(this.value)
+    }
+    slider.addEventListener('change', function() { methods.createPassword(this.value, methods.typePassword(inputs)) })
+
+    Array.from(inputs).forEach(function(chck) {
+        chck.addEventListener('change', function(e) {
+
+            if (methods.checkeds([...inputs]) === 0) {
+                return e.target.checked = true
+            }
+            methods.createPassword(slider.value, methods.typePassword(inputs))
         })
+    })
+
+    but.addEventListener('click', function(e) {
+        let img = but.querySelector('.img')
+        img.style.transform = `rotate(${deg}deg)`
+        deg = deg + 360
+        methods.createPassword(slider.value, methods.typePassword(inputs))
+    })
+
+    copyPswBtn.addEventListener('click', function(e) {
+        methods.copyToClipboard(password)
+        copyPswBtn.classList.add('copu')
+        setTimeout(() => {
+            copyPswBtn.classList.remove('copu')
+        }, 300)
+    })
 
 
-        const init = () => {
-            slider.value = options.val
-            slider.min = options.min
-            slider.max = options.max
-            lengthpsw.innerHTML = options.val
-            createPassword(slider.value, typePassword(inputs))
-        }
-        init()
+    $.generator = function(options) {
 
-
+        const setings = Object.assign({}, options)
+        return methods.init(setings)
     }
 })()
